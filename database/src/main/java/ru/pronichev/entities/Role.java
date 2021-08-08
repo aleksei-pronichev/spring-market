@@ -1,6 +1,7 @@
 package ru.pronichev.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,18 +16,18 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "ROLES")
 @Data
 @NoArgsConstructor
-public class Role {
+@Entity
+@Table(name = "ROLES")
+public class Role implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROLE_ID")
     private Long id;
 
-    @Column(name = "NAME", unique = true, nullable = false)
+    @Column(name = "NAME", unique = true, nullable = false, length = 100)
     private String name;
 
     @JsonIgnore

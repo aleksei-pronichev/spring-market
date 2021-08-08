@@ -1,5 +1,6 @@
 package ru.pronichev.entities;
 
+import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,24 +15,25 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table(name = "USERS")
+
 @Data
 @NoArgsConstructor
-public class User {
+@Entity
+@Table(name = "USERS")
+public class User implements Serializable {
 
     @Id
     @Column(name = "USER_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USERNAME", nullable = false)
+    @Column(name = "USERNAME", nullable = false, length = 100)
     private String username;
 
     @Column(name = "AGE", nullable = false)
     private Integer age;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "PASSWORD", length = 100)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
