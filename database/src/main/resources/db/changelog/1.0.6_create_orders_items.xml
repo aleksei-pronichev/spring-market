@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create_orders_items" author="aleksei pronichev">
+        <createTable tableName="ORDERS_ITEMS">
+            <column name="ORDER_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_orders_items_order_id" references="ORDERS(ORDER_ID)"/>
+            </column>
+            <column name="PRODUCT_ID" type="BIGINT">
+                <constraints nullable="false" foreignKeyName="fk_orders_items_product_id"
+                             references="PRODUCTS(PRODUCT_ID)"/>
+            </column>
+            <column name="QUANTITY" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE_PER_PRODUCT" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="DATETIME"/>
+            <column name="UPDATED_AT" type="DATETIME"/>
+        </createTable>
+        <addPrimaryKey constraintName="pk_orders_items" tableName="ORDERS_ITEMS" columnNames="ORDER_ID, PRODUCT_ID"/>
+    </changeSet>
+
+</databaseChangeLog>
