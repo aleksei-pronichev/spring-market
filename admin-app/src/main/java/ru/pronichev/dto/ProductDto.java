@@ -37,7 +37,12 @@ public class ProductDto {
     }
 
     public static ProductDto empty() {
-        return new ProductDto();
+        var productDto = new ProductDto();
+
+        productDto.setCategoryDto(CategoryDto.empty());
+        productDto.setBrandDto(BrandDto.empty());
+
+        return productDto;
     }
 
     public Product toProduct() {

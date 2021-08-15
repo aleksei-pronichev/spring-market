@@ -15,7 +15,8 @@
 			<form method="post" th:action="@{/login_processing}">
 				<div class="form-group">
 					<label>Username</label>
-					<label for="username"></label><input class="form-control" id="username" name="username" placeholder="Enter username"
+					<label for="username"></label><input class="form-control" id="username" name="username"
+														 placeholder="Enter username"
 														 type="text">
 					<p class="text-danger" th:if="${param.error != null}">Incorrect login or password</p>
 					<p class="text-success" th:if="${param.logout != null}">Logout successful</p>
