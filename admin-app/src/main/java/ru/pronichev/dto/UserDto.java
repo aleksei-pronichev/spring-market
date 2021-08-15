@@ -3,13 +3,11 @@ package ru.pronichev.dto;
 import java.util.Collection;
 import javax.validation.constraints.NotBlank;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.pronichev.entities.User;
 
 @Data
-@Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserDto {
 
@@ -31,13 +29,15 @@ public class UserDto {
     private Collection<RoleDto> roles;
 
     public static UserDto toDto(User user) {
-        return UserDto.builder()
-            .id(user.getId())
-            .username(user.getUsername())
-            .password(user.getPassword())
-            .age(user.getAge())
-            .email(user.getEmail())
-            .build();
+        var dto = new UserDto();
+
+        dto.setId(user.getId());
+        dto.setUsername(user.getUsername());
+        dto.setPassword(user.getPassword());
+        dto.setAge(user.getAge());
+        dto.setEmail(user.getEmail());
+
+        return dto;
     }
 
     public static UserDto empty() {

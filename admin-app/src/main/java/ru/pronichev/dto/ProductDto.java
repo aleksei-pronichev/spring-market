@@ -2,13 +2,11 @@ package ru.pronichev.dto;
 
 import javax.validation.constraints.NotBlank;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.pronichev.entities.Product;
 
 @Data
-@Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProductDto {
 
@@ -26,14 +24,16 @@ public class ProductDto {
     private BrandDto brandDto;
 
     public static ProductDto toDto(Product product) {
-        return ProductDto.builder()
-            .id(product.getId())
-            .title(product.getTitle())
-            .description(product.getDescription())
-            .price(product.getPrice())
-            .categoryDto(CategoryDto.toDto(product.getCategory()))
-            .brandDto(BrandDto.toDto(product.getBrand()))
-            .build();
+        var dto = new ProductDto();
+
+        dto.setId(product.getId());
+        dto.setTitle(product.getTitle());
+        dto.setDescription(product.getDescription());
+        dto.setPrice(product.getPrice());
+        dto.setCategoryDto(CategoryDto.toDto(product.getCategory()));
+        dto.setBrandDto(BrandDto.toDto(product.getBrand()));
+
+        return dto;
     }
 
     public static ProductDto empty() {

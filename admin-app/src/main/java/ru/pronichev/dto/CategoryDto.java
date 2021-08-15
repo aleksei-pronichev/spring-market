@@ -2,13 +2,11 @@ package ru.pronichev.dto;
 
 import javax.validation.constraints.NotBlank;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.pronichev.entities.Category;
 
 @Data
-@Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CategoryDto {
 
@@ -20,10 +18,13 @@ public class CategoryDto {
     private String description;
 
     public static CategoryDto toDto(Category category) {
-        return CategoryDto.builder()
-            .id(category.getId())
-            .title(category.getTitle())
-            .build();
+        var dto = new CategoryDto();
+
+        dto.setId(category.getId());
+        dto.setTitle(category.getTitle());
+        dto.setDescription(category.getDescription());
+
+        return dto;
     }
 
     public static CategoryDto empty() {
