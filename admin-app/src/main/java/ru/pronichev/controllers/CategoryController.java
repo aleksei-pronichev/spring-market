@@ -4,19 +4,16 @@ import java.util.Optional;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import ru.pronichev.dto.CategoryDto;
 import ru.pronichev.exceptions.NotFoundException;
 import ru.pronichev.services.CategoryService;
@@ -75,13 +72,5 @@ public class CategoryController {
     public String deleteCategory(@PathVariable("id") Long id) {
         categoryService.deleteById(id);
         return "redirect:/category";
-    }
-
-    @ExceptionHandler
-    public ModelAndView notFoundExceptionHandler(NotFoundException ex) {
-        ModelAndView modelAndView = new ModelAndView("not_found");
-        modelAndView.addObject("message", ex.getMessage());
-        modelAndView.setStatus(HttpStatus.NOT_FOUND);
-        return modelAndView;
     }
 }
