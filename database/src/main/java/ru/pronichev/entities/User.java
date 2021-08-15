@@ -27,7 +27,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "USERNAME", nullable = false, length = 100)
+    @Column(name = "USERNAME", nullable = false, unique = true, length = 100)
     private String username;
 
     @Column(name = "AGE", nullable = false)
@@ -35,6 +35,9 @@ public class User implements Serializable {
 
     @Column(name = "PASSWORD", length = 100)
     private String password;
+
+    @Column(name = "EMAIL", length = 100)
+    private String email;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USERS_ROLES",

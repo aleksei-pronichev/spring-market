@@ -7,13 +7,14 @@
     <changeSet id="create_users_roles" author="aleksei pronichev">
         <createTable tableName="USERS_ROLES">
             <column name="USER_ID" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_users_roles_user_id" references="USERS(USER_ID)"/>
+                <constraints nullable="false" foreignKeyName="fk_users_roles_user_id" referencedTableName="USERS"
+                             referencedColumnNames="USER_ID" primaryKey="true"/>
             </column>
             <column name="ROLE_ID" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_users_roles_role_id" references="ROLES(ROLE_ID)"/>
+                <constraints nullable="false" foreignKeyName="fk_users_roles_role_id" referencedTableName="ROLES"
+                             referencedColumnNames="ROLE_ID" primaryKey="true"/>
             </column>
         </createTable>
-        <addPrimaryKey constraintName="pk_user_roles" tableName="USERS_ROLES" columnNames="USER_ID, ROLE_ID"/>
     </changeSet>
 
 </databaseChangeLog>

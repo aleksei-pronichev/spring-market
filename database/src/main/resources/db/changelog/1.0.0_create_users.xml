@@ -6,18 +6,19 @@
 
     <changeSet id="create_users" author="aleksei pronichev">
         <createTable tableName="USERS">
-            <column name="USER_ID" type="BIGINT">
+            <column autoIncrement="true" name="USER_ID" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="USERNAME" type="VARCHAR(100)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="AGE" type="INT">
+            <column name="AGE" type="INT" defaultValue="18">
                 <constraints nullable="false"/>
             </column>
             <column name="PASSWORD" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
+            <column name="EMAIL" type="VARCHAR(100)"/>
         </createTable>
     </changeSet>
 

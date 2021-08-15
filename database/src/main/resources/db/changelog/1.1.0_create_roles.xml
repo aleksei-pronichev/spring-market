@@ -6,7 +6,7 @@
 
     <changeSet id="create_roles" author="aleksei pronichev">
         <createTable tableName="ROLES">
-            <column name="ROLE_ID" type="BIGINT">
+            <column autoIncrement="true" name="ROLE_ID" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="NAME" type="VARCHAR(100)">

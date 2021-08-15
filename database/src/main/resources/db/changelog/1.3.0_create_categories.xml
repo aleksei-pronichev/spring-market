@@ -6,11 +6,11 @@
 
     <changeSet id="create_categories" author="aleksei pronichev">
         <createTable tableName="CATEGORIES">
-            <column name="CATEGORY_ID" type="BIGINT">
+            <column autoIncrement="true" name="CATEGORY_ID" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="TITLE" type="VARCHAR(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="DESCRIPTION" type="VARCHAR(255)"/>
         </createTable>

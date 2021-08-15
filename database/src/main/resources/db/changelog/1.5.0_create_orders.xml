@@ -6,11 +6,12 @@
 
     <changeSet id="create_orders" author="aleksei pronichev">
         <createTable tableName="ORDERS">
-            <column name="ORDER_ID" type="BIGINT">
+            <column autoIncrement="true" name="ORDER_ID" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="OWNER_ID" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_orders_user_id" references="USERS(USER_ID)"/>
+                <constraints nullable="false" foreignKeyName="fk_orders_user_id" referencedTableName="USERS"
+                             referencedColumnNames="USER_ID"/>
             </column>
             <column name="ADDRESS" type="VARCHAR(255)">
                 <constraints nullable="false"/>

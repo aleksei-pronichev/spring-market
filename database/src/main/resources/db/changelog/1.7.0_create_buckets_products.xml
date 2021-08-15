@@ -7,17 +7,16 @@
     <changeSet id="create_orders_bucket_products" author="aleksei pronichev">
         <createTable tableName="BUCKETS_PRODUCTS">
             <column name="USER_ID" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_bucket_products_user_id" references="USERS(USER_ID)"/>
+                <constraints nullable="false" foreignKeyName="fk_bucket_products_user_id" referencedTableName="USERS"
+                             referencedColumnNames="USER_ID" primaryKey="true"/>
             </column>
             <column name="PRODUCT_ID" type="BIGINT">
                 <constraints nullable="false" foreignKeyName="fk_bucket_products_product_id"
-                             references="PRODUCTS(PRODUCT_ID)"/>
+                             referencedTableName="PRODUCTS" referencedColumnNames="PRODUCT_ID" primaryKey="true"/>
             </column>
             <column name="COUNT" type="INT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addPrimaryKey constraintName="pk_bucket_products" tableName="BUCKETS_PRODUCTS"
-                       columnNames="USER_ID, PRODUCT_ID"/>
     </changeSet>
 </databaseChangeLog>
