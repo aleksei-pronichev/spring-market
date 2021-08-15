@@ -39,6 +39,10 @@ public class Product implements Serializable {
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name = "BRAND_ID", referencedColumnName = "BRAND_ID")
+    private Brand brand;
+
     @CreationTimestamp
     @Column(name = "CREATED_AT")
     private LocalDateTime created;

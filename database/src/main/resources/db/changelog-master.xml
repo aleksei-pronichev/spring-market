@@ -22,4 +22,7 @@
     <include file="changelog/1.6.0_create_orders_items.xml" relativeToChangelogFile="true"/>
 
     <include file="changelog/1.7.0_create_buckets_products.xml" relativeToChangelogFile="true"/>
+
+    <include file="changelog/1.8.0_create_brands.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/1.8.1_alter_products_to_add_brand.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
