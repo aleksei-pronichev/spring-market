@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/navigation.html :: head">
+</head>
+
+<body>
+
+<nav th:replace="fragments/navigation.html :: navigation">
+</nav>
+
+<div class="container">
+	<div class="row py-2">
+		<div class="col-12">
+			<form method="post" th:action="@{/category}" th:object="${category}">
+				<input id="id" th:field="*{id}" type="hidden">
+				<div class="form-group">
+					<label>Name</label>
+					<input class="form-control" id="name" placeholder="Enter category name" th:field="*{name}"
+						   type="text">
+					<p class="text-danger" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></p>
+				</div>
+				<button class="btn btn-primary" type="submit">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<th:block th:replace="fragments/scripts.html :: scripts">
+</th:block>
+
+</body>
+
+</html>
