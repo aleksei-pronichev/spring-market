@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="product" type="ru.pronichev.dto.ProductDto"*/-->
 
 <head th:replace="fragments/navigation.html :: head">
+	<title>products</title>
 </head>
 
 <body>
@@ -30,8 +32,8 @@
 				<tbody>
 				<tr th:each="product: ${products.content}" th:if="${products.hasContent()}">
 					<th scope="row" th:text="${product.id}">1</th>
-					<td th:text="${product.name}">Product</td>
-					<td th:text="${product.category.name}">Category</td>
+					<td th:text="${product.title}">Product</td>
+					<td th:text="${product.category.title}">Category</td>
 					<td th:text="${product.price}">$100</td>
 					<td>
 						<a class="btn btn-success" th:href="@{/product/{id}(id = ${product.id})}"><i

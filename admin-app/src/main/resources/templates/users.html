@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="user" type="ru.pronichev.dto.UserDto"*/-->
 
 <head th:replace="fragments/navigation.html :: head">
-</head>
+	<title>users</title></head>
 
 <body>
 
@@ -38,7 +39,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<tr th:each="user : ${users.content}" th:if="${users.hasContent()}">
+				<tr th:each="user : ${users}" th:if="${users.hasContent()}">
 					<th scope="row" th:text="${user.id}">1</th>
 					<td th:text="${user.username}">Alex</td>
 					<td>
@@ -67,6 +68,6 @@
 
 	<th:block th:replace="fragments/scripts.html :: scripts">
 	</th:block>
-
+</div>
 </body>
 </html>

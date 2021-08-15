@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="category" type="ru.pronichev.dto.CategoryDto"*/-->
 
 <head th:replace="fragments/navigation.html :: head">
+	<title>categories</title>
 </head>
-
 <body>
 
 <nav th:replace="fragments/navigation.html :: navigation">
@@ -20,14 +21,14 @@
 				<thead>
 				<tr>
 					<th scope="col" th:replace="fragments/sort_header :: sort_header_category ('Id', 'id')"></th>
-					<th scope="col" th:replace="fragments/sort_header :: sort_header_category ('Name', 'name')"></th>
+					<th scope="col" th:replace="fragments/sort_header :: sort_header_category ('Title', 'title')"></th>
 					<th scope="col">Actions</th>
 				</tr>
 				</thead>
 				<tbody>
 				<tr th:each="category: ${categories}" th:if="${categories.hasContent()}">
 					<th scope="row" th:text="${category.id}">1</th>
-					<td th:text="${category.name}">Category</td>
+					<td th:text="${category.title}">Category</td>
 					<td>
 						<a class="btn btn-success" th:href="@{/category/{id}(id = ${category.id})}"><i
 								class="fas fa-edit"></i></a>
