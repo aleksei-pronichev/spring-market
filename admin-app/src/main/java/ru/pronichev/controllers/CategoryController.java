@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pronichev.dto.CategoryDto;
-import ru.pronichev.exceptions.NotFoundException;
 import ru.pronichev.services.CategoryService;
 
 @Controller
@@ -26,16 +25,19 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @Value("category_form")
-    private String categoryPage;
+    private String categoryForm;
 
     @GetMapping
     public String listPage(@RequestParam("page") Optional<Integer> page,
                            @RequestParam("size") Optional<Integer> size,
                            @RequestParam("sortField") Optional<String> sortField, Model model) {
-        model.addAttribute("categories", categoryService.findAll(
-            page.orElse(1) - 1,
-            size.orElse(5),
-            sortField.filter(fld -> !fld.isBlank()).orElse("id")));
+        model.addAttribute("categories",
+            categoryService.findAll(
+                page.orElse(1) - 1,
+                size.orElse(5),
+                sortField.filter(fld -> !fld.isBlank()).orElse("id")
+            ).map(CategoryDto::toDto)
+        );
         return "categories";
     }
 
@@ -47,24 +49,25 @@ public class CategoryController {
     @GetMapping("/new")
     public String newCategoryForm(Model model) {
         model.addAttribute("category", CategoryDto.empty());
-        return categoryPage;
+        return categoryForm;
     }
 
     @GetMapping("/{id}")
     public String editCategory(@PathVariable("id") Long id, Model model) {
 
-        model.addAttribute("category", categoryService.findById(id)
-            .orElseThrow(() -> new NotFoundException("Category not found")));
-        return categoryPage;
+        model.addAttribute("category", CategoryDto.toDto(categoryService.findById(id)));
+
+        return categoryForm;
     }
 
     @PostMapping
-    public String update(@Valid @ModelAttribute("category") CategoryDto category, BindingResult result) {
+    public String update(@Valid @ModelAttribute("category") CategoryDto categoryDto, BindingResult result) {
 
         if (result.hasErrors()) {
-            return categoryPage;
+            return categoryForm;
         }
-        categoryService.save(category);
+        categoryService.save(categoryDto);
+
         return "redirect:/category";
     }
 
