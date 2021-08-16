@@ -68,18 +68,20 @@ public class UserController {
 
     @PostMapping
     public String update(@Valid @ModelAttribute("user") UserDto user, BindingResult result, Model model) {
-
+        System.out.println("111111111111111111111111111111111111111111111111111111111");
+        System.out.println(user);
         if (result.hasErrors()) {
+            result.getAllErrors().forEach(System.out::println);
             model.addAttribute(rolesAttr, getRoles());
             return userForm;
         }
-
+        System.out.println("222222222222222222222222222222222222222222222222222");
         if (!user.getPassword().equals(user.getRepeatPassword())) {
             model.addAttribute(rolesAttr, getRoles());
             result.rejectValue("password", "", "Repeated password is not correct");
             return userForm;
         }
-
+        System.out.println("333333333333333333333333333333333333333333333333");
         userService.save(user);
         return "redirect:/user";
     }

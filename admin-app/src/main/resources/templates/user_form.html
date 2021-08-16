@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="user" type="ru.pronichev.dto.UserDto"*/-->
 
 <head th:replace="fragments/navigation.html :: head">
-</head>
+	<title>add user</title></head>
 
 <body>
 
@@ -37,9 +38,10 @@
 					<label for="roles">Roles</label>
 					<select class="form-control" id="roles" multiple required th:field="*{roles}">
 						<option th:each="role : ${roles}"
-								th:selected="${user.roles?.contains(role)}"
 								th:text="${role.name}"
-								th:value="${role.id} + ';' + ${role.name}"></option>
+								th:value="${role.id} + ';' + ${role.name}"
+								th:selected="${user.roles?.contains(role)}">
+						</option>
 					</select>
 				</div>
 				<button class="btn btn-primary" type="submit">Submit</button>
