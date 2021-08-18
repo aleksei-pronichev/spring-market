@@ -17,8 +17,9 @@
 				<input id="id" th:field="*{id}" type="hidden">
 				<div class="form-group">
 					<label>Title</label>
-					<label for="title"></label><input class="form-control" id="title" placeholder="Enter brand title" th:field="*{title}"
-													 type="text">
+					<label for="title"></label><input class="form-control" id="title" placeholder="Enter brand title"
+													  th:field="*{title}"
+													  type="text">
 					<p class="text-danger" th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
 				</div>
 				<button class="btn btn-primary" type="submit">Submit</button>

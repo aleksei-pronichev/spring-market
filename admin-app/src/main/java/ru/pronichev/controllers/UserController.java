@@ -1,7 +1,5 @@
 package ru.pronichev.controllers;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.pronichev.dto.RoleDto;
 import ru.pronichev.dto.UserDto;
 import ru.pronichev.dto.params.UserListParams;
 import ru.pronichev.services.RoleService;
@@ -54,7 +51,7 @@ public class UserController {
     public String newUserForm(Model model) {
 
         model.addAttribute("user", UserDto.empty());
-        model.addAttribute(rolesAttr, getRoles());
+        model.addAttribute(rolesAttr, roleService.findAllDto());
         return userForm;
     }
 
@@ -62,26 +59,21 @@ public class UserController {
     public String editUser(@PathVariable("id") Long id, Model model) {
 
         model.addAttribute("user", UserDto.toDto(userService.findById(id)));
-        model.addAttribute(rolesAttr, getRoles());
+        model.addAttribute(rolesAttr, roleService.findAllDto());
         return userForm;
     }
 
     @PostMapping
     public String update(@Valid @ModelAttribute("user") UserDto user, BindingResult result, Model model) {
-        System.out.println("111111111111111111111111111111111111111111111111111111111");
-        System.out.println(user);
         if (result.hasErrors()) {
-            result.getAllErrors().forEach(System.out::println);
-            model.addAttribute(rolesAttr, getRoles());
+            model.addAttribute(rolesAttr, roleService.findAllDto());
             return userForm;
         }
-        System.out.println("222222222222222222222222222222222222222222222222222");
         if (!user.getPassword().equals(user.getRepeatPassword())) {
-            model.addAttribute(rolesAttr, getRoles());
+            model.addAttribute(rolesAttr, roleService.findAllDto());
             result.rejectValue("password", "", "Repeated password is not correct");
             return userForm;
         }
-        System.out.println("333333333333333333333333333333333333333333333333");
         userService.save(user);
         return "redirect:/user";
     }
@@ -90,12 +82,5 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return "redirect:/user";
-    }
-
-    private List<RoleDto> getRoles() {
-        return roleService.findAll()
-            .stream()
-            .map(RoleDto::toDto)
-            .collect(Collectors.toList());
     }
 }

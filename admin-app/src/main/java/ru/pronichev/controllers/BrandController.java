@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.pronichev.dto.BrandDto;
-import ru.pronichev.dto.CategoryDto;
 import ru.pronichev.services.BrandService;
-import ru.pronichev.services.CategoryService;
 
 @Controller
 @RequestMapping("/brand")

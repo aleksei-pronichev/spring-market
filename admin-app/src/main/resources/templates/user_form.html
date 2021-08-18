@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <!--/*@thymesVar id="user" type="ru.pronichev.dto.UserDto"*/-->
+<!--/*@thymesVar id="role" type="ru.pronichev.dto.RoleDto"*/-->
+<!--/*@thymesVar id="roles" type="java.util.Collection<ru.pronichev.dto.RoleDto>"*/-->
+<!--/*@thymesVar id="data" type="org.springframework.data.domain.Page"*/-->
+<!--/*@thymesVar id="num" type="java.lang.Integer"*/-->
 
 <head th:replace="fragments/navigation.html :: head">
 	<title>add user</title></head>
@@ -17,30 +21,33 @@
 				<input id="id" th:field="*{id}" type="hidden">
 				<div class="form-group">
 					<label>Username</label>
-					<input class="form-control" id="name" placeholder="Enter username" th:field="*{username}"
-						   type="text">
+					<label for="name"></label><input class="form-control" id="name" placeholder="Enter username"
+													 th:field="*{username}"
+													 type="text">
 					<p class="text-danger" th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></p>
 				</div>
 				<div class="form-group">
 					<label>Password</label>
-					<input class="form-control" id="password" placeholder="Enter password" th:field="*{password}"
-						   type="password">
+					<label for="password"></label><input class="form-control" id="password" placeholder="Enter password"
+														 th:field="*{password}"
+														 type="password">
 					<p class="text-danger" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
 				</div>
 				<div class="form-group">
 					<label>Repeat password</label>
-					<input class="form-control" id="repeatPassword" placeholder="Repeat password"
-						   th:field="*{repeatPassword}"
-						   type="password">
+					<label for="repeatPassword"></label><input class="form-control" id="repeatPassword"
+															   placeholder="Repeat password"
+															   th:field="*{repeatPassword}"
+															   type="password">
 					<p class="text-danger" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
 				</div>
 				<div class="form-group">
 					<label for="roles">Roles</label>
 					<select class="form-control" id="roles" multiple required th:field="*{roles}">
 						<option th:each="role : ${roles}"
+								th:selected="${user.roles?.contains(role)}"
 								th:text="${role.name}"
-								th:value="${role.id} + ';' + ${role.name}"
-								th:selected="${user.roles?.contains(role)}">
+								th:value="${role.id} + ';' + ${role.name}">
 						</option>
 					</select>
 				</div>

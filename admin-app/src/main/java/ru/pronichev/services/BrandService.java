@@ -1,6 +1,7 @@
 package ru.pronichev.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +20,12 @@ public class BrandService {
 
     public List<Brand> findAll() {
         return brandRepository.findAll();
+    }
+
+    public List<BrandDto> findAllDto() {
+        return brandRepository.findAll().stream()
+            .map(BrandDto::toDto)
+            .collect(Collectors.toList());
     }
 
     public Page<Brand> findAll(Integer page, Integer size, String sortField) {
