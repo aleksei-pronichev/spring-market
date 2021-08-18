@@ -13,7 +13,7 @@
 <div class="container">
 	<div class="row py-2">
 		<div class="col-12">
-			<a class="btn btn-primary" th:href="@{/brand/new}">Add Category</a>
+			<a class="btn btn-primary" th:href="@{/brand/new}">Add Brand</a>
 		</div>
 
 		<div class="col-12">
@@ -28,7 +28,7 @@
 				<tbody>
 				<tr th:each="brand: ${brands}" th:if="${brands.hasContent()}">
 					<th scope="row" th:text="${brand.id}">1</th>
-					<td th:text="${brand.title}">Category</td>
+					<td th:text="${brand.title}">Brand</td>
 					<td>
 						<a class="btn btn-success" th:href="@{/brand/{id}(id = ${brand.id})}"><i
 								class="fas fa-edit"></i></a>
@@ -38,7 +38,7 @@
 					</td>
 				</tr>
 
-				<tr th:unless="${brand.hasContent()}">
+				<tr th:unless="${brands.hasContent()}">
 					<td colspan="4">No data</td>
 				</tr>
 
@@ -46,9 +46,9 @@
 			</table>
 		</div>
 
-		<div th:replace="fragments/paginator.html :: paginator(${brand}, ~{::paginatorLink})">
+		<div th:replace="fragments/paginator.html :: paginator(${brands}, ~{::paginatorLink})">
 			<a class="page-link" th:fragment="paginatorLink"
-			   th:href="@{/category(page=${num}, size=${data.size}, sortField=${param.sortField})}"
+			   th:href="@{/brand(page=${num}, size=${data.size}, sortField=${param.sortField})}"
 			   th:text="${num}">1</a>
 		</div>
 	</div>
