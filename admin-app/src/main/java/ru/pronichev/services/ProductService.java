@@ -28,7 +28,7 @@ public class ProductService {
     }
 
     public void save(ProductDto productDto) {
-        var category = categoryService.findById(productDto.getCategoryDto().getId());
+        var category = categoryService.findById(productDto.getCategory().getId());
         var brand = brandService.findById(productDto.getBrandDto().getId());
 
         var product = productDto.toProduct();

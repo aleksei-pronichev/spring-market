@@ -34,8 +34,8 @@ public class CategoryDto {
     public Category toCategory() {
         var category = new Category();
 
-        category.setTitle(title);
         category.setId(id);
+        category.setTitle(title);
         category.setDescription(description);
 
         return category;
