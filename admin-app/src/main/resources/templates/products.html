@@ -36,12 +36,13 @@
 				<tr th:each="product: ${products.content}" th:if="${products.hasContent()}">
 					<th scope="row" th:text="${product.id}">1</th>
 					<td th:text="${product.title}">Product</td>
-					<td th:text="${product.categoryDto.title}">Category</td>
+					<td th:text="${product.category.title}">Category</td>
 					<td th:text="${product.price}">$100</td>
 					<td>
 						<a class="btn btn-success" th:href="@{/product/{id}(id = ${product.id})}"><i
 								class="fas fa-edit"></i></a>
 						<form class="d-inline" th:action="@{/product/{id}(id = ${product.id})}" th:method="delete">
+							<input name="_method" type="hidden" value="delete"/>
 							<button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i></button>
 						</form>
 					</td>

@@ -21,7 +21,7 @@ public class ProductDto {
 
     private CategoryDto category;
 
-    private BrandDto brandDto;
+    private BrandDto brand;
 
     public static ProductDto toDto(Product product) {
         var dto = new ProductDto();
@@ -31,7 +31,7 @@ public class ProductDto {
         dto.setDescription(product.getDescription());
         dto.setPrice(product.getPrice());
         dto.setCategory(CategoryDto.toDto(product.getCategory()));
-        dto.setBrandDto(BrandDto.toDto(product.getBrand()));
+        dto.setBrand(BrandDto.toDto(product.getBrand()));
 
         return dto;
     }
@@ -40,7 +40,7 @@ public class ProductDto {
         var productDto = new ProductDto();
 
         productDto.setCategory(CategoryDto.empty());
-        productDto.setBrandDto(BrandDto.empty());
+        productDto.setBrand(BrandDto.empty());
 
         return productDto;
     }
@@ -53,7 +53,7 @@ public class ProductDto {
         product.setDescription(description);
         product.setPrice(price);
         product.setCategory(category.toCategory());
-        product.setBrand(brandDto.toBrand());
+        product.setBrand(brand.toBrand());
 
         return product;
     }

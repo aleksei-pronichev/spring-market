@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.pronichev.dto.CategoryDto;
 import ru.pronichev.dto.ProductDto;
 import ru.pronichev.services.BrandService;
 import ru.pronichev.services.CategoryService;
@@ -89,6 +88,12 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteById(id);
+        return "redirect:/product";
+    }
+
+    @PostMapping("/{id}")
+    public String postProduct(@PathVariable("id") Long id) {
+        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         return "redirect:/product";
     }
 }

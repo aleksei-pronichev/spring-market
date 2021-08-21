@@ -36,7 +36,7 @@
 				<div class="form-group">
 					<label>Price</label>
 					<label for="price"></label><input class="form-control" id="price" placeholder="Enter price"
-													  step=".01" th:field="*{price}"
+													  step="1" th:field="*{price}"
 													  type="number">
 					<p class="text-danger" th:errors="*{price}" th:if="${#fields.hasErrors('price')}"></p>
 				</div>
@@ -44,18 +44,19 @@
 					<label for="brands">Brand</label>
 					<select class="form-control" id="brands" name="brand" required>
 						<option th:each="brand : ${brands}"
-								th:selected="${product.brandDto?.id == brand.id}"
+								th:selected="${product.brand?.id == brand.id}"
 								th:text="${brand.title}"
-								th:value="${brand.id}"></option>
+								th:value="${brand.id}">
+						</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="categories">Category</label>
 					<select class="form-control" id="categories" name="category" required>
 						<option th:each="category : ${categories}"
+								th:selected="${product.category?.id == category.id}"
 								th:text="${category.title}"
-								th:value="${category.id}"
-								th:selected="${product.category?.id == category.id}">
+								th:value="${category.id}">
 
 						</option>
 					</select>

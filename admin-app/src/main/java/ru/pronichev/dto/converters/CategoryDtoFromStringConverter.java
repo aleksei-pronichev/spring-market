@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.pronichev.dto.CategoryDto;
 
 @Component
-public class StringToCategoryDtoConverter implements Converter<String, CategoryDto> {
+public class CategoryDtoFromStringConverter implements Converter<String, CategoryDto> {
 
     @Override
     public CategoryDto convert(String id) {
