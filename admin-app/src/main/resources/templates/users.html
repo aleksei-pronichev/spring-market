@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="user" type="ru.pronichev.dto.UserDto"*/-->
+<!--/*@thymesVar id="data" type="org.springframework.data.domain.Page"*/-->
+<!--/*@thymesVar id="num" type="java.lang.Integer"*/-->
+
+<head th:replace="fragments/navigation.html :: head">
+	<title>users</title></head>
+
+<body>
+
+<nav th:replace="fragments/navigation.html :: navigation">
+</nav>
+
+<div class="container">
+	<div class="row py-2">
+		<div class="col-12">
+			<a class="btn btn-primary" th:href="@{/user/new}">Add User</a>
+		</div>
+
+		<div class="col-12 mt-3">
+			<form class="form-inline" th:method="get">
+				<div class="form-group mb-2 mr-2">
+					<label class="sr-only" for="usernameFilter">Username filter</label>
+					<input class="form-control" id="usernameFilter" name="usernameFilter" placeholder="Username filter"
+						   th:value="${param.usernameFilter}" type="text">
+				</div>
+
+				<button class="btn btn-primary mb-2" type="submit">Apply</button>
+			</form>
+		</div>
+
+		<div class="col-12">
+			<table class="table table-bordered my-2">
+				<thead>
+				<tr>
+					<th scope="col" th:replace="fragments/sort_header :: sort_header_user ('Id', 'id')"></th>
+					<th scope="col"
+						th:replace="fragments/sort_header :: sort_header_user ('Username', 'username')"></th>
+					<th scope="col">Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="user : ${users}" th:if="${users.hasContent()}">
+					<th scope="row" th:text="${user.id}">1</th>
+					<td th:text="${user.username}">Alex</td>
+					<td>
+						<a class="btn btn-success" th:href="@{/user/{id}(id = ${user.id})}"><i class="fas fa-edit"></i></a>
+						<form class="d-inline" th:action="@{/user/{id}(id = ${user.id})}" th:method="delete">
+							<button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i></button>
+						</form>
+					</td>
+				</tr>
+
+				<tr th:unless="${users.hasContent()}">
+					<td colspan="4">No data</td>
+				</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+		<div th:replace="fragments/paginator.html :: paginator(${users}, ~{::paginatorLink})">
+			<a class="page-link" th:fragment="paginatorLink"
+			   th:href="@{/user(page=${num}, size=${data.size},
+               usernameFilter=${param.usernameFilter}, sortField=${param.sortField})}"
+			   th:text="${num}">1</a>
+		</div>
+	</div>
+
+	<th:block th:replace="fragments/scripts.html :: scripts">
+	</th:block>
+</div>
+</body>
+</html>

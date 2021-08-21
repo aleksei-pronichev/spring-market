@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="brand" type="ru.pronichev.dto.BrandDto"*/-->
+<!--/*@thymesVar id="data" type="org.springframework.data.domain.Page"*/-->
+<!--/*@thymesVar id="num" type="java.lang.Integer"*/-->
+
+<head th:replace="fragments/navigation.html :: head">
+	<title>brands</title>
+</head>
+<body>
+
+<nav th:replace="fragments/navigation.html :: navigation">
+</nav>
+
+<div class="container">
+	<div class="row py-2">
+		<div class="col-12">
+			<a class="btn btn-primary" th:href="@{/brand/new}">Add Brand</a>
+		</div>
+
+		<div class="col-12">
+			<table class="table table-bordered my-2">
+				<thead>
+				<tr>
+					<th scope="col" th:replace="fragments/sort_header :: sort_header_brand ('Id', 'id')"></th>
+					<th scope="col" th:replace="fragments/sort_header :: sort_header_brand ('Title', 'title')"></th>
+					<th scope="col">Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="brand: ${brands}" th:if="${brands.hasContent()}">
+					<th scope="row" th:text="${brand.id}">1</th>
+					<td th:text="${brand.title}">Brand</td>
+					<td>
+						<a class="btn btn-success" th:href="@{/brand/{id}(id = ${brand.id})}"><i
+								class="fas fa-edit"></i></a>
+						<form class="d-inline" th:action="@{/brand/{id}(id = ${brand.id})}" th:method="delete">
+							<button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i></button>
+						</form>
+					</td>
+				</tr>
+
+				<tr th:unless="${brands.hasContent()}">
+					<td colspan="4">No data</td>
+				</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+		<div th:replace="fragments/paginator.html :: paginator(${brands}, ~{::paginatorLink})">
+			<a class="page-link" th:fragment="paginatorLink"
+			   th:href="@{/brand(page=${num}, size=${data.size}, sortField=${param.sortField})}"
+			   th:text="${num}">1</a>
+		</div>
+	</div>
+</div>
+
+<th:block th:replace="fragments/scripts.html :: scripts">
+</th:block>
+
+</body>
+</html>

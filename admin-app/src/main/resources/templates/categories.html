@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="category" type="ru.pronichev.dto.CategoryDto"*/-->
+<!--/*@thymesVar id="data" type="org.springframework.data.domain.Page"*/-->
+<!--/*@thymesVar id="num" type="java.lang.Integer"*/-->
+
+<head th:replace="fragments/navigation.html :: head">
+	<title>categories</title>
+</head>
+<body>
+
+<nav th:replace="fragments/navigation.html :: navigation">
+</nav>
+
+<div class="container">
+	<div class="row py-2">
+		<div class="col-12">
+			<a class="btn btn-primary" th:href="@{/category/new}">Add Category</a>
+		</div>
+
+		<div class="col-12">
+			<table class="table table-bordered my-2">
+				<thead>
+				<tr>
+					<th scope="col" th:replace="fragments/sort_header :: sort_header_category ('Id', 'id')"></th>
+					<th scope="col" th:replace="fragments/sort_header :: sort_header_category ('Title', 'title')"></th>
+					<th scope="col">Actions</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr th:each="category: ${categories}" th:if="${categories.hasContent()}">
+					<th scope="row" th:text="${category.id}">1</th>
+					<td th:text="${category.title}">Category</td>
+					<td>
+						<a class="btn btn-success" th:href="@{/category/{id}(id = ${category.id})}"><i
+								class="fas fa-edit"></i></a>
+						<form class="d-inline" th:action="@{/category/{id}(id = ${category.id})}" th:method="delete">
+							<button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i></button>
+						</form>
+					</td>
+				</tr>
+
+				<tr th:unless="${categories.hasContent()}">
+					<td colspan="4">No data</td>
+				</tr>
+
+				</tbody>
+			</table>
+		</div>
+
+		<div th:replace="fragments/paginator.html :: paginator(${categories}, ~{::paginatorLink})">
+			<a class="page-link" th:fragment="paginatorLink"
+			   th:href="@{/category(page=${num}, size=${data.size}, sortField=${param.sortField})}"
+			   th:text="${num}">1</a>
+		</div>
+	</div>
+</div>
+
+<th:block th:replace="fragments/scripts.html :: scripts">
+</th:block>
+
+</body>
+</html>

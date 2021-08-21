@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--/*@thymesVar id="category" type="ru.pronichev.dto.CategoryDto"*/-->
+
+<head th:replace="fragments/navigation.html :: head">
+	<title>add category</title></head>
+
+<body>
+
+<nav th:replace="fragments/navigation.html :: navigation">
+</nav>
+
+<div class="container">
+	<div class="row py-2">
+		<div class="col-12">
+			<form method="post" th:action="@{/category}" th:object="${category}">
+				<input id="id" th:field="*{id}" type="hidden">
+				<div class="form-group">
+					<label>Title</label>
+					<label for="title"></label><input class="form-control" id="title" placeholder="Enter category title"
+													  th:field="*{title}"
+													  type="text">
+					<p class="text-danger" th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></p>
+				</div>
+				<button class="btn btn-primary" type="submit">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<th:block th:replace="fragments/scripts.html :: scripts">
+</th:block>
+
+</body>
+
+</html>
