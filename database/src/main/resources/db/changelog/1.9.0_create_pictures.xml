@@ -12,6 +12,9 @@
             <column name="CONTENT_TYPE" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="TITLE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
             <column name="STORAGE_ID" type="varchar(255)"/>
             <column name="PRODUCT_ID" type="BIGINT">
                 <constraints foreignKeyName="fr_pictures_product_id" referencedTableName="PRODUCTS"

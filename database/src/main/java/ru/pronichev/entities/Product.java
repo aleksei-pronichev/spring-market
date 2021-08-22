@@ -57,5 +57,5 @@ public class Product implements Serializable {
     private LocalDateTime updated;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
-    private Collection<Picture> products;
+    private Collection<Picture> pictures;
 }

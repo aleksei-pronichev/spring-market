@@ -5,6 +5,8 @@
 <!--/*@thymesVar id="categories" type="java.util.Collection<ru.pronichev.dto.CategoryDto>"*/-->
 <!--/*@thymesVar id="brand" type="ru.pronichev.dto.BrandDto"*/-->
 <!--/*@thymesVar id="brands" type="java.util.Collection<ru.pronichev.dto.BrandDto>"*/-->
+<!--/*@thymesVar id="picture" type="ru.pronichev.dto.PictureDto"*/-->
+<!--/*@thymesVar id="pictures" type="java.util.Collection<ru.pronichev.dto.PictureDto>"*/-->
 
 <head th:replace="fragments/navigation.html :: head">
 	<title>Add product</title></head>
@@ -17,7 +19,7 @@
 <div class="container">
 	<div class="row py-2">
 		<div class="col-12">
-			<form method="post" th:action="@{/product}" th:object="${product}">
+			<form enctype="multipart/form-data" method="post" th:action="@{/product}" th:object="${product}">
 				<input id="id" th:field="*{id}" type="hidden">
 				<div class="form-group">
 					<label>Name</label>
@@ -61,8 +63,18 @@
 						</option>
 					</select>
 				</div>
+				<div class="form-group">
+					<label for="newPictures">Product image</label>
+					<input class="form-control" id="newPictures" multiple placeholder="Upload new product picture"
+						   th:field="*{newPictures}" type="file">
+				</div>
 				<button class="btn btn-primary" type="submit">Submit</button>
 			</form>
+		</div>
+		<hr style="border-width: 3px;">
+		<div class="col-12">
+			<img height="150px" th:each="picture: ${pictures}" th:alt="${picture.title}"
+				 th:src="@{/picture/{id}(id = ${picture.id})}">
 		</div>
 	</div>
 </div>
