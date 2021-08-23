@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +26,10 @@ public class PictureController {
         } catch (IOException e) {
             throw new PictureServiceException(e);
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteByID(@PathVariable("id") Long id) {
+        System.out.println("delete here");
     }
 }

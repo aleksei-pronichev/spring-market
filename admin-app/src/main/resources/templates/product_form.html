@@ -7,6 +7,16 @@
 <!--/*@thymesVar id="brands" type="java.util.Collection<ru.pronichev.dto.BrandDto>"*/-->
 <!--/*@thymesVar id="picture" type="ru.pronichev.dto.PictureDto"*/-->
 <!--/*@thymesVar id="pictures" type="java.util.Collection<ru.pronichev.dto.PictureDto>"*/-->
+<style>
+    div.img-block {
+        margin: 5px;
+        padding: 10px 20px;
+        display: inline-block;
+        border: 1px solid #900000;
+        box-sizing: border-box;
+		position: relative;
+    }
+</style>
 
 <head th:replace="fragments/navigation.html :: head">
 	<title>Add product</title></head>
@@ -64,7 +74,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="newPictures">Product image</label>
+					<label for="newPictures">Add product image</label>
 					<input class="form-control" id="newPictures" multiple placeholder="Upload new product picture"
 						   th:field="*{newPictures}" type="file">
 				</div>
@@ -72,9 +82,17 @@
 			</form>
 		</div>
 		<hr style="border-width: 3px;">
-		<div class="col-12">
-			<img height="150px" th:each="picture: ${pictures}" th:alt="${picture.title}"
+		<div class="img-block" th:each="picture: ${pictures}">
+			<img height="150px" th:alt="${picture.title}"
 				 th:src="@{/picture/{id}(id = ${picture.id})}">
+			<form class="d-inline" th:action="@{/picture/{id}(id = ${picture.id})}" th:method="delete">
+				<input name="_method" type="hidden" value="delete"/>
+				<button
+						class="btn btn-danger"
+						style="position: absolute; top:0; right: 0; cursor:pointer"
+						type="submit"><i
+						class="far fa-trash-alt"></i></button>
+			</form>
 		</div>
 	</div>
 </div>
