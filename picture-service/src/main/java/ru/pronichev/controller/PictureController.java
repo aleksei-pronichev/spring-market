@@ -1,6 +1,7 @@
 package ru.pronichev.controller;
 
 import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,8 @@ public class PictureController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteByID(@PathVariable("id") Long id) {
-        System.out.println("delete here");
+    public String deleteByID(@PathVariable("id") Long id, HttpServletRequest request) {
+        pictureService.deleteById(id);
+        return "redirect:" + request.getHeader("referer");
     }
 }

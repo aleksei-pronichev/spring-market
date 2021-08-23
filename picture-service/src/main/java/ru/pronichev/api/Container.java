@@ -9,4 +9,6 @@ public interface Container<T> {
     Optional<byte[]> getDataById(T id);
 
     Optional<String> create(byte[] data);
+
+    void remove(T id);
 }
