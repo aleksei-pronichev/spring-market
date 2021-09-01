@@ -1,0 +1,26 @@
+server:
+  servlet:
+    context-path: /api
+  port: 8182
+
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.151.5:3306/market?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: userPC
+    password: 123465!q
+  liquibase:
+    change-log: classpath:db/changelog-master.xml
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

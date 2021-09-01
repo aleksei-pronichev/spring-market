@@ -12,10 +12,10 @@
     <artifactId>backend-api-app</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -25,6 +25,16 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>ru.pronichev</groupId>
+            <artifactId>database</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.bsc.maven</groupId>-->
+<!--            <artifactId>maven-processor-plugin</artifactId>-->
+<!--            <version>4.5</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -33,6 +43,31 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.bsc.maven</groupId>-->
+<!--                <artifactId>maven-processor-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>process</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <configuration>-->
+<!--                            <compilerArguments>-AaddGeneratedAnnotation=false</compilerArguments> &lt;!&ndash; suppress java.annotation &ndash;&gt;-->
+<!--                            <processors>-->
+<!--                                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>-->
+<!--                            </processors>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.hibernate</groupId>-->
+<!--                        <artifactId>hibernate-jpamodelgen</artifactId>-->
+<!--                        <version>5.5.7.Final</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

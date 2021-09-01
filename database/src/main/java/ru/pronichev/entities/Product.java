@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -24,6 +26,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 @NoArgsConstructor
 @Entity
 @Table(name = "PRODUCTS")
+@NamedEntityGraph(
+    name = "product-test",
+    attributeNodes = {
+        @NamedAttributeNode("category")
+    }
+)
+
 public class Product implements Serializable {
 
     @Id
@@ -40,7 +49,7 @@ public class Product implements Serializable {
     @Column(name = "PRICE", nullable = false)
     private Integer price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "CATEGORY_ID")
     private Category category;
 
