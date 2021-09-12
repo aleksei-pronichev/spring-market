@@ -51,7 +51,6 @@ public class UserService {
     }
 
     public void save(UserDto userDto) {
-        System.out.println("сервис");
         var roleList = userDto.getRoles()
             .stream()
             .map(roleDto -> roleService.findById(roleDto.getId()))

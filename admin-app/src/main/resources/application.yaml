@@ -11,7 +11,7 @@ spring:
   liquibase:
     change-log: classpath:db/changelog-master.xml
   jpa:
-    show-sql: true
+    #    show-sql: true
     hibernate:
       ddl-auto: validate
       naming:
@@ -20,3 +20,11 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL8Dialect
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+pictures:
+  storage:
+    path: ./storage

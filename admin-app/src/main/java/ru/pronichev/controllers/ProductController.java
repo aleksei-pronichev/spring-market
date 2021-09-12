@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.pronichev.dto.CategoryDto;
 import ru.pronichev.dto.ProductDto;
+import ru.pronichev.service.PictureService;
 import ru.pronichev.services.BrandService;
 import ru.pronichev.services.CategoryService;
 import ru.pronichev.services.ProductService;
@@ -28,12 +28,16 @@ public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final BrandService brandService;
+    private final PictureService pictureService;
 
     @Value("categories")
     private String categoriesAttr;
 
     @Value("brands")
     private String brandsAttr;
+
+    @Value("pictures")
+    private String pictures;
 
     @Value("product_form")
     private String productForm;
@@ -67,21 +71,22 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("product", ProductDto.toDto(productService.findById(id)));
+        var product = ProductDto.toDto(productService.findById(id));
+
+        model.addAttribute("product", product);
         model.addAttribute(categoriesAttr, categoryService.findAllDto());
         model.addAttribute(brandsAttr, brandService.findAllDto());
+        model.addAttribute(pictures, product.getPictures());
         return productForm;
     }
 
     @PostMapping
     public String update(@Valid @ModelAttribute("product") ProductDto product, BindingResult result, Model model) {
-
         if (result.hasErrors()) {
             model.addAttribute(categoriesAttr, categoryService.findAllDto());
             model.addAttribute(brandsAttr, brandService.findAllDto());
             return productForm;
         }
-
         productService.save(product);
         return "redirect:/product";
     }

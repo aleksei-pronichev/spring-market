@@ -42,6 +42,13 @@
 					<p class="text-danger" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></p>
 				</div>
 				<div class="form-group">
+					<label>Age</label>
+					<label for="age"></label><input class="form-control" id="age" placeholder="Enter age"
+													step="1" th:field="*{age}"
+													type="number">
+					<p class="text-danger" th:errors="*{username}" th:if="${#fields.hasErrors('age')}"></p>
+				</div>
+				<div class="form-group">
 					<label for="roles">Roles</label>
 					<select class="form-control" id="roles" multiple required th:field="*{roles}">
 						<option th:each="role : ${roles}"

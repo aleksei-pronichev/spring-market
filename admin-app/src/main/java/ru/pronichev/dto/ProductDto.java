@@ -1,9 +1,12 @@
 package ru.pronichev.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 import ru.pronichev.entities.Product;
 
 @Data
@@ -21,7 +24,11 @@ public class ProductDto {
 
     private CategoryDto category;
 
-    private BrandDto brandDto;
+    private BrandDto brand;
+
+    private List<PictureDto> pictures;
+
+    private MultipartFile[] newPictures;
 
     public static ProductDto toDto(Product product) {
         var dto = new ProductDto();
@@ -31,7 +38,12 @@ public class ProductDto {
         dto.setDescription(product.getDescription());
         dto.setPrice(product.getPrice());
         dto.setCategory(CategoryDto.toDto(product.getCategory()));
-        dto.setBrandDto(BrandDto.toDto(product.getBrand()));
+        dto.setBrand(BrandDto.toDto(product.getBrand()));
+        dto.setPictures(
+            product.getPictures().stream()
+                .map(PictureDto::toDto)
+                .collect(Collectors.toList())
+        );
 
         return dto;
     }
@@ -40,7 +52,7 @@ public class ProductDto {
         var productDto = new ProductDto();
 
         productDto.setCategory(CategoryDto.empty());
-        productDto.setBrandDto(BrandDto.empty());
+        productDto.setBrand(BrandDto.empty());
 
         return productDto;
     }
@@ -53,7 +65,7 @@ public class ProductDto {
         product.setDescription(description);
         product.setPrice(price);
         product.setCategory(category.toCategory());
-        product.setBrand(brandDto.toBrand());
+        product.setBrand(brand.toBrand());
 
         return product;
     }

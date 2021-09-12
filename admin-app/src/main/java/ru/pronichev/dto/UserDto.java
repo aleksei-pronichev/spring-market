@@ -1,6 +1,7 @@
 package ru.pronichev.dto;
 
 import java.util.Collection;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class UserDto {
     @NotBlank
     private String password;
 
+    @Min(18)
     private Integer age;
 
     private String email;
