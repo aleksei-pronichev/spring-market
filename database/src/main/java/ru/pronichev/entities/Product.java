@@ -27,9 +27,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @Table(name = "PRODUCTS")
 @NamedEntityGraph(
-    name = "product-test",
+    name = "product-with-info",
     attributeNodes = {
-        @NamedAttributeNode("category")
+        @NamedAttributeNode("category"),
+        @NamedAttributeNode("brand")
     }
 )
 

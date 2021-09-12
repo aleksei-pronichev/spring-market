@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /api
+    context-path: /api/v1
   port: 8182
 
 spring:
@@ -24,3 +24,7 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+pictures:
+  storage:
+    path: ./storage

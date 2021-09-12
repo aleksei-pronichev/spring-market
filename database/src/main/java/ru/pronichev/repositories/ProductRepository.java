@@ -10,6 +10,6 @@ import ru.pronichev.entities.Product;
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
     @Override
-    @EntityGraph("product-test")
+    @EntityGraph("product-with-info")
     List<Product> findAll(Specification<Product> specification);
 }

@@ -1,38 +1,40 @@
-package ru.pronichev.spec;
+package ru.pronichev.specifications;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import ru.pronichev.entities.Product;
+import ru.pronichev.entities.meta.Brand_;
 import ru.pronichev.entities.meta.Category_;
 import ru.pronichev.entities.meta.Product_;
+import ru.pronichev.params.ProductParamList;
 
 @Component
-public class TestSpec {
+public class ProductSpecifications {
 
     public Specification<Product> generateSpecification(ProductParamList params) {
         Specification<Product> spec = Specification.where(null);
 
-        if (params.getId() != null) {
-            spec = spec.and(withProductId(params.getId()));
+        if (params.getCategoryId() != null) {
+            spec = spec.and(withCategory(params.getCategoryId()));
         }
         if (params.getCategoryId() != null) {
-            spec = spec.and(withCategoryId(params.getCategoryId()));
+            spec = spec.and(withBrand(params.getBrandId()));
         }
 
         return spec;
     }
 
-    private Specification<Product> withProductId(Long id) {
-        return (
-            (root, criteriaQuery, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get(Product_.ID), id)
-        );
-    }
-
-    private Specification<Product> withCategoryId(Long id) {
+    public Specification<Product> withCategory(Long id) {
         return (
             (root, criteriaQuery, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get(Product_.CATEGORY).get(Category_.ID), id)
+        );
+    }
+
+    public Specification<Product> withBrand(Long id) {
+        return (
+            (root, criteriaQuery, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get(Product_.BRAND).get(Brand_.ID), id)
         );
     }
 }

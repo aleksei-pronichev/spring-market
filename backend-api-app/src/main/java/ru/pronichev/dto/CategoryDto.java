@@ -10,9 +10,7 @@ import ru.pronichev.entities.Category;
 public class CategoryDto {
 
     private Long id;
-
     private String title;
-
     private String description;
 
     public static CategoryDto toDto(Category category) {

@@ -1,4 +1,4 @@
-package ru.pronichev.dto.params;
+package ru.pronichev.params;
 
 
 import lombok.Data;

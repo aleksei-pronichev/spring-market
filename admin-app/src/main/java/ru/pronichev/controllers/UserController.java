@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.pronichev.dto.UserDto;
-import ru.pronichev.dto.params.UserListParams;
+import ru.pronichev.params.UserListParams;
 import ru.pronichev.services.RoleService;
 import ru.pronichev.services.UserService;
 

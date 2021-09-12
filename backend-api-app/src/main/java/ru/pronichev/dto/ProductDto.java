@@ -1,8 +1,11 @@
 package ru.pronichev.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.pronichev.entities.Picture;
 import ru.pronichev.entities.Product;
 
 @Data
@@ -10,12 +13,12 @@ import ru.pronichev.entities.Product;
 public class ProductDto {
 
     private Long id;
-
     private String title;
-
     private String description;
-
     private Integer price;
+    private CategoryDto category;
+    private BrandDto brand;
+    private List<Long> pictures;
 
     public static ProductDto toDto(Product product) {
         var dto = new ProductDto();
@@ -24,11 +27,24 @@ public class ProductDto {
         dto.setTitle(product.getTitle());
         dto.setDescription(product.getDescription());
         dto.setPrice(product.getPrice());
+        dto.setCategory(CategoryDto.toDto(product.getCategory()));
+        dto.setBrand(BrandDto.toDto(product.getBrand()));
+        dto.setPictures(
+            product.getPictures()
+                .stream()
+                .map(Picture::getId)
+                .collect(Collectors.toList())
+        );
 
         return dto;
     }
 
     public static ProductDto empty() {
+        var dto = new ProductDto();
+
+        dto.setCategory(CategoryDto.empty());
+        dto.setBrand(BrandDto.empty());
+
         return new ProductDto();
     }
 

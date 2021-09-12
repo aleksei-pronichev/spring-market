@@ -11,11 +11,11 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.pronichev.dto.UserDto;
-import ru.pronichev.dto.params.UserListParams;
 import ru.pronichev.entities.User;
 import ru.pronichev.exceptions.NotFoundException;
+import ru.pronichev.params.UserListParams;
 import ru.pronichev.repositories.UserRepository;
-import ru.pronichev.spec.UserSpecifications;
+import ru.pronichev.specifications.UserSpecifications;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +36,7 @@ public class UserService {
         return userRepository.findAll(spec,
             PageRequest.of(
                 Optional.ofNullable(userListParams.getPage()).orElse(1) - 1,
-                Optional.ofNullable(userListParams.getSize()).orElse(3),
+                Optional.ofNullable(userListParams.getSize()).orElse(5),
                 Sort.by(Optional.ofNullable(userListParams.getSortField())
                     .filter(c -> !c.isBlank())
                     .orElse("id")

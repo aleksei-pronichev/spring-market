@@ -1,10 +1,10 @@
-package ru.pronichev.spec;
+package ru.pronichev.specifications;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-import ru.pronichev.dto.params.UserListParams;
 import ru.pronichev.entities.User;
+import ru.pronichev.params.UserListParams;
 
 @Component
 public class UserSpecifications {
